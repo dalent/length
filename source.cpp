@@ -18,7 +18,7 @@ int main()
 	std::ofstream of("output.txt",std::ios_base::trunc);
 	of.setf(std::ios::fixed, std::ios::floatfield);  
 	of.precision(2);//设置精度 
-	map<string, float> transfer_key_value;//设置一个key key为名称 value 为和m的比例 map
+	map<string, float> transfer_key_value;//设置一个key key为名称， value 为和 m 的比例 map
 	string lineStr;
 	of<<"anqiu1987@sina.com\n";
 	while(std::getline(istream,lineStr))
@@ -35,7 +35,7 @@ int main()
 				return -1;
 			}
 			
-		}else//the counter
+		}else//计算
 		{
 			float total = 0;
 			if(!AddUp(ss, transfer_key_value,total))
@@ -50,6 +50,7 @@ int main()
 
 	istream.close();
 	istream.close();
+	return 0;
 		
 }
 bool GetMap(stringstream &ss, map<string,float>&transfer_key_value)
@@ -64,7 +65,7 @@ bool GetMap(stringstream &ss, map<string,float>&transfer_key_value)
 			{
 				return false;
 			}
-			transfer_key_value.insert(std::make_pair<string,float>(name,j)); 
+			transfer_key_value.insert(std::make_pair<string,float>(name,j)); //复数形式，我们也加上去
 			if(0 == strcmp(name.c_str(), "mile"))
 			{
 				transfer_key_value.insert(std::make_pair<string,float>((string)"miles",j));
@@ -91,8 +92,8 @@ bool AddUp(stringstream &ss,  map<string,float>&transfer_key_value, float &total
 			ss>>i >>name;
 			if(ss.bad())
 			{return false;}
-			total += i * transfer_key_value[(string)name];
-			while(ss>>operate)
+			total += i * transfer_key_value[(string)name];//第一个
+			while(ss>>operate)//取得计算符号
 			{
 				ss>>i>>name;
 				if(ss.bad())
